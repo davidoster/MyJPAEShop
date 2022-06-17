@@ -5,6 +5,9 @@
 package services;
 
 import dao.CustomerDAO;
+import dto.CustomerOrderedProducts;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import models.Customer;
 
@@ -47,10 +50,27 @@ public class CustomerService implements CustomerServiceInterface {
     public Set<Customer> findAll() {
         return(dao.findAll());
     }
-
+    
     @Override
     public boolean delete(Integer id) {
         return(dao.delete(id));
     }
+
+    @Override
+    public boolean buyProduct(Integer customerId, Long productId) {
+        return(dao.buyProduct(customerId, productId));
+    }
+
+    @Override
+    public List<CustomerOrderedProducts> customersOrders() {
+        List<CustomerOrderedProducts> customersOrders = new ArrayList<>();
+        Set<Customer> customers = dao.findAllEager();
+        for (Customer customer : customers) {
+            customersOrders.add(new CustomerOrderedProducts(customer, customer.getProducts()));
+        }
+        return(customersOrders);
+    }
+
+    
     
 }

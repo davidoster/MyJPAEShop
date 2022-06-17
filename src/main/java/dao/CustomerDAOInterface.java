@@ -16,8 +16,12 @@ public interface CustomerDAOInterface {
     Customer create(String firstName, String lastName, String email);
     
     Customer findById(Integer id);
+    
     Set<Customer> findAll();
+    Set<Customer> findAllEager();
     
     boolean delete(Integer id);
+    
+    boolean buyProduct(Integer customerId, Long productId);
     
 }

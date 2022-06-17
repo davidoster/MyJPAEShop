@@ -35,7 +35,7 @@ public class Customer implements Serializable {
     private String email;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Orders", 
+    @JoinTable(name = "orders", 
         joinColumns = { @JoinColumn(name = "customerId") }, 
         inverseJoinColumns = { @JoinColumn(name = "productId") })
     private List<Product> products = new ArrayList<>();

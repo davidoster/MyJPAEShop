@@ -30,7 +30,7 @@ public class CustomerDAO implements CustomerDAOInterface {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Customer c = new Customer(firstName, lastName, email);
-        c.getProducts().add(new Product("Product 2", "Product 2 Description", 200));
+//        c.getProducts().add(new Product("Product 2", "Product 2 Description", 200));
         em.persist(c);
         em.getTransaction().commit();
         em.close();
@@ -53,6 +53,15 @@ public class CustomerDAO implements CustomerDAOInterface {
         em.close();
         return(customers);
     }
+    
+    @Override
+    public Set<Customer> findAllEager() {
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT c FROM customers c JOIN FETCH c.products"); // JPQL
+        Set<Customer> customers = new HashSet<>(query.getResultList());
+        em.close();
+        return(customers);
+    }
 
     @Override
     public boolean delete(Integer id) {
@@ -68,5 +77,23 @@ public class CustomerDAO implements CustomerDAOInterface {
         em.close();
         return(false);
     }
+
+    @Override
+    public boolean buyProduct(Integer customerId, Long productId) {
+        EntityManager em = emf.createEntityManager();
+        Customer c =  em.find(Customer.class, customerId);
+        Product p =  em.find(Product.class, productId);
+        if(c != null && p != null) {
+            em.getTransaction().begin();
+            c.getProducts().add(p);
+            em.getTransaction().commit();
+            em.close();
+            return(true);
+        }
+        em.close();
+        return(false);
+    }
+
+    
     
 }

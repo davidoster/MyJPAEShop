@@ -4,6 +4,8 @@
  */
 package services;
 
+import dto.CustomerOrderedProducts;
+import java.util.List;
 import java.util.Set;
 import models.Customer;
 
@@ -21,4 +23,6 @@ public interface CustomerServiceInterface {
     Set<Customer> findAll();
     
     boolean delete(Integer id);
+    boolean buyProduct(Integer customerId, Long productId);
+    List<CustomerOrderedProducts> customersOrders();
 }

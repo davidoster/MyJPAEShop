@@ -1,7 +1,9 @@
+controllers\OrderController.class
 services\CustomerServiceInterface.class
 controllers\NewCustomerController.class
 dao\ProductDAOInterface.class
 dao\CustomerDAO.class
+controllers\CustomersOrders.class
 services\CustomerService.class
 models\Product_.class
 controllers\CustomerController.class
@@ -12,6 +14,7 @@ services\ProductServiceInterface.class
 controllers\DeleteCustomer.class
 models\Customer.class
 dao\CustomerDAOInterface.class
+dto\CustomerOrderedProducts.class
 controllers\ProductController.class
 dao\ProductDAO.class
 controllers\DeleteProduct.class
